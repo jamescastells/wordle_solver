@@ -60,6 +60,14 @@ def delete_words_without_letter(list,letter):
         i = i + 1
     return list
 
+def delete_words_with_letter_in_positions(list,letter,positions):
+    i = 0
+    for pos_i in positions:
+        if pos_i == 'b':
+            list = delete_words_with_letter_in_position(list,letter,i)
+        i = i + 1
+    return list
+
 def reduce_list(list,word,result):
     i = 0
     checked_letters = []
@@ -68,13 +76,21 @@ def reduce_list(list,word,result):
         if (result_i == 'g'):
             list = delete_words_without_letter_in_position(list,letter,i)
             checked_letters.append(letter)
+        i = i + 1
+    i = 0
+    for result_i in result:
+        letter = word[i]
         if (result_i == 'y'):
             list = delete_words_with_letter_in_position(list,letter,i)
             list = delete_words_without_letter(list,letter)
             checked_letters.append(letter)
+        i = i + 1
+    i = 0
+    for result_i in result:
+        letter = word[i]
         if letter in checked_letters:
             if (result_i == 'b'):
-                list = delete_words_with_letter_in_position(list,letter,i)
+                list = delete_words_with_letter_in_positions(list,letter,result)
         else:
             if (result_i == 'b'):
                 list = delete_words_with_letter(list,letter)
